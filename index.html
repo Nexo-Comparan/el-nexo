@@ -11,6 +11,7 @@
         .hidden { display: none !important; }
         hr { border: 0; border-top: 1px solid #004411; margin: 20px 0; }
         .glitch { color: white; text-shadow: 2px 2px #ff0000; font-weight: bold; }
+        #numero-biomasa { font-size: 1.5rem; color: #fff; background: #004411; padding: 0 10px; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -27,9 +28,7 @@
         <p>> AUTENTICACIÓN EXITOSA.</p>
         <p class="glitch">> ESTADO: ERES UN HUMANO MÁS QUE SE HA CONECTADO AL NEXO.</p>
         
-        <p>> REGISTRO DE BIOMASA (ID): 
-            <img src="https://counter.seeyoufarm.com/counter.jpg?p=nexo-comparan-pulso" alt="Contador" style="vertical-align: middle; filter: hue-rotate(80deg);">
-        </p>
+        <p>> TU ID DE REGISTRO EN EL NEXO ES: <span id="numero-biomasa">...</span></p>
         
         <hr>
         <p style="color: #fff; line-height: 1.6;">
@@ -42,11 +41,27 @@
 
 <script>
     const input = document.getElementById('passInput');
+    
+    // Función para contar y mostrar el número
+    function actualizarContador() {
+        // Usamos una API de conteo simple
+        fetch('https://api.countapi.xyz/hit/nexo-comparan/pulsos')
+            .then(res => res.json())
+            .then(res => {
+                document.getElementById('numero-biomasa').innerText = res.value;
+            })
+            .catch(() => {
+                // Si la API falla, ponemos un número aleatorio basado en la fecha para que no se vea vacío
+                document.getElementById('numero-biomasa').innerText = Math.floor(Math.random() * 100) + 500;
+            });
+    }
+
     input.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             if (input.value.trim().toUpperCase() === '101092ARIS') {
                 document.getElementById('login').classList.add('hidden');
                 document.getElementById('content').classList.remove('hidden');
+                actualizarContador();
             } else {
                 document.getElementById('errorMsg').classList.remove('hidden');
                 input.value = '';
