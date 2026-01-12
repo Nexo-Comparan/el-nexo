@@ -11,7 +11,7 @@
         .hidden { display: none !important; }
         hr { border: 0; border-top: 1px solid #004411; margin: 20px 0; }
         .glitch { color: white; text-shadow: 2px 2px #ff0000; font-weight: bold; }
-        #biomasa-id { color: #fff; background: #004411; padding: 2px 10px; border-radius: 3px; font-weight: bold; }
+        #contador-real { color: #fff; background: #004411; padding: 2px 10px; border-radius: 3px; font-weight: bold; font-size: 1.4rem; }
     </style>
 </head>
 <body>
@@ -20,64 +20,45 @@
     <div id="login">
         <p>> SISTEMA OPERATIVO NEXO [v.2120.9]</p>
         <p>> ESTADO: VIGILANCIA BIOMÉTRICA ACTIVA</p>
-        <p>> NODO: GRAN TERMINAL / ACCESO RESTRINGIDO</p>
         <br>
-        <p>> INGRESE CÓDIGO DE AUTORIZACIÓN (ARIS-KEY):</p>
+        <p>> INGRESE CÓDIGO DE ACCESO (ARIS-KEY):</p>
         <input type="text" id="passInput" autofocus autocomplete="off" placeholder="_">
-        <p id="errorMsg" class="hidden" style="color: #ff4444; margin-top: 10px;">> ERROR: ACCESO DENEGADO. PATRÓN NO RECONOCIDO.</p>
+        <p id="errorMsg" class="hidden" style="color: #ff4444; margin-top: 10px;">> ERROR: ACCESO DENEGADO.</p>
     </div>
 
     <div id="content" class="hidden">
         <p>> AUTENTICACIÓN EXITOSA.</p>
-        <p>> IDENTIDAD CONFIRMADA POR EL BIBLIOTECARIO.</p>
         <p class="glitch">> ESTADO: ERES UN HUMANO MÁS QUE SE HA CONECTADO AL NEXO.</p>
         
-        <p>> TU ID DE REGISTRO EN EL NEXO ES: <span id="biomasa-id">DETECTANDO...</span></p>
+        <p>> TU ID DE REGISTRO EN EL NEXO ES: 
+            <span id="contador-real">
+                <img src="https://counter.seeyoufarm.com/counter.jpg?p=nexo-comparan-final" alt="Cargando..." style="vertical-align: middle; filter: invert(1) hue-rotate(90deg) brightness(1.5);">
+            </span>
+        </p>
         
         <hr>
-        
         <p style="color: #fff; line-height: 1.6;">
-            <strong>[MENSAJE ENCRIPTADO RECUPERADO]:</strong><br><br>
-            "Felicidades, Natural. Has llegado al final, o eso es lo que el algoritmo te ha hecho creer. 
-            El Nexo ya conoce tu rastro, pero ahora tú conoces el suyo. No cierres los ojos. 
-            'El Último Pulso' no es solo una historia... es una advertencia. 
-            Elian no es el único que está despertando. La verdadera resistencia comienza fuera de la pantalla."
+            <strong>[MENSAJE DE ARIS]:</strong><br><br>
+            "Felicidades, Natural. Has llegado al final. 
+            El Nexo ya conoce tu rastro, pero ahora tú conoces el suyo. 
+            No cierres los ojos. 'El Último Pulso' no es una historia... es una advertencia."
         </p>
-        <br>
-        <p style="animation: blinker 1s linear infinite;">> ESPERANDO ÓRDENES PARA EL SIGUIENTE PULSO_</p>
     </div>
 </div>
 
 <script>
-    // Generador de ID para evitar que el contador falle
-    function generarID() {
-        // Esto crea un número que parece un contador real basado en la fecha y visitas
-        let base = 742; 
-        let visitasLocal = localStorage.getItem('visitasNexo') || 0;
-        visitasLocal++;
-        localStorage.setItem('visitasNexo', visitasLocal);
-        document.getElementById('biomasa-id').innerText = "H-" + (parseInt(base) + parseInt(visitasLocal)).toString().padStart(5, '0');
-    }
-
     const input = document.getElementById('passInput');
     input.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            const secret = input.value.trim().toUpperCase();
-            
-            // LA CONTRASEÑA ES 101092ARIS
-            if (secret === '101092ARIS') {
+            if (input.value.trim().toUpperCase() === '101092ARIS') {
                 document.getElementById('login').classList.add('hidden');
                 document.getElementById('content').classList.remove('hidden');
-                generarID();
             } else {
                 document.getElementById('errorMsg').classList.remove('hidden');
                 input.value = '';
             }
         }
     });
-
-    @keyframes blinker { 50% { opacity: 0; } }
 </script>
-
 </body>
 </html>
