@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL CENTRAL - EL NEXO</title>
+    <style>
+        /* Estética Cyberpunk / Terminal */
+        body { 
+            background-color: #050505; 
+            color: #00ff41; 
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden;
+        }
+        #terminal { 
+            width: 90%; 
+            max-width: 650px; 
+            border: 1px solid #00ff41; 
+            padding: 25px; 
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); 
+            background: #000; 
+            position: relative;
+        }
+        input { 
+            background: transparent; 
+            border: none; 
+            color: #00ff41; 
+            font-family: inherit; 
+            font-size: 1.2rem; 
+            outline: none; 
+            width: 100%; 
+            border-bottom: 1px solid #004411; 
+            margin-top: 15px; 
+            text-transform: uppercase;
+        }
+        .hidden { display: none; }
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+        hr { border: 0; border-top: 1px solid #004411; margin: 25px 0; }
+        .glitch { color: white; text-shadow: 2px 2px #ff0000; font-weight: bold; }
+        .info { font-size: 0.9rem; color: #008822; }
+    </style>
+</head>
+<body>
+
+<div id="terminal">
+    <div id="login">
+        <p class="info">> SISTEMA OPERATIVO NEXO [v.2120.9]</p>
+        <p class="info">> ESTADO: VIGILANCIA BIOMÉTRICA ACTIVA</p>
+        <p class="info">> NODO: GRAN
