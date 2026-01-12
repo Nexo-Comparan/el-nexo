@@ -6,12 +6,12 @@
     <title>TERMINAL CENTRAL - EL NEXO</title>
     <style>
         body { background-color: #050505; color: #00ff41; font-family: 'Courier New', monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
-        #terminal { width: 90%; max-width: 600px; border: 1px solid #00ff41; padding: 30px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); background: #000; }
+        #terminal { width: 90%; max-width: 600px; border: 1px solid #00ff41; padding: 30px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); background: #000; text-align: left; }
         input { background: transparent; border: none; color: #00ff41; font-family: inherit; font-size: 1.2rem; outline: none; width: 100%; border-bottom: 1px solid #004411; margin-top: 15px; text-transform: uppercase; }
         .hidden { display: none !important; }
         hr { border: 0; border-top: 1px solid #004411; margin: 20px 0; }
         .glitch { color: white; text-shadow: 2px 2px #ff0000; font-weight: bold; }
-        #biomasa-contador { color: #fff; background: #004411; padding: 2px 10px; border-radius: 3px; font-weight: bold; }
+        .contador-container { margin-top: 10px; background: #001a00; padding: 10px; display: inline-block; border: 1px solid #004411; }
     </style>
 </head>
 <body>
@@ -30,7 +30,10 @@
         <p>> AUTENTICACIÓN EXITOSA.</p>
         <p class="glitch">> ESTADO: ERES UN HUMANO MÁS QUE SE HA CONECTADO AL NEXO.</p>
         
-        <p>> TU ID DE REGISTRO EN EL NEXO ES: <span id="biomasa-contador">00000</span></p>
+        <div class="contador-container">
+            <p style="margin:0; font-size: 0.8rem;">> ID REGISTRO DE BIOMASA:</p>
+            <img src="https://www.free-website-hit-counter.com/c.php?d=9&id=168532&s=2" border="0" alt="Contador" style="margin-top:5px; filter: brightness(1.2) sepia(1) hue-rotate(70deg) saturate(3);">
+        </div>
         
         <hr>
         <p style="color: #fff; line-height: 1.6;">
@@ -44,30 +47,11 @@
 
 <script>
     const input = document.getElementById('passInput');
-    
-    // Función para el contador real usando una API de texto
-    function cargarContador() {
-        // Usamos un servicio que no es imagen para evitar bloqueos
-        fetch('https://api.countapi.xyz/hit/nexo-comparan-elnexo/visitas')
-        .then(res => res.json())
-        .then(res => {
-            document.getElementById('biomasa-contador').innerText = res.value.toString().padStart(5, '0');
-        })
-        .catch(() => {
-            // Si el servidor de conteo falla, creamos uno local basado en visitas del navegador
-            let visitas = localStorage.getItem('nexo_visitas') || 124;
-            visitas++;
-            localStorage.setItem('nexo_visitas', visitas);
-            document.getElementById('biomasa-contador').innerText = visitas.toString().padStart(5, '0');
-        });
-    }
-
     input.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             if (input.value.trim().toUpperCase() === '101092ARIS') {
                 document.getElementById('login').classList.add('hidden');
                 document.getElementById('content').classList.remove('hidden');
-                cargarContador();
             } else {
                 document.getElementById('errorMsg').classList.remove('hidden');
                 input.value = '';
