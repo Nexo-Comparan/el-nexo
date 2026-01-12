@@ -5,41 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERMINAL CENTRAL - EL NEXO</title>
     <style>
-        /* Estética de Terminal Cyberpunk */
-        body { 
-            background-color: #050505; 
-            color: #00ff41; 
-            font-family: 'Courier New', Courier, monospace; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0; 
-            overflow: hidden;
-        }
-        #terminal { 
-            width: 90%; 
-            max-width: 600px; 
-            border: 1px solid #00ff41; 
-            padding: 30px; 
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); 
-            background: #000; 
-        }
-        input { 
-            background: transparent; 
-            border: none; 
-            color: #00ff41; 
-            font-family: inherit; 
-            font-size: 1.2rem; 
-            outline: none; 
-            width: 100%; 
-            border-bottom: 1px solid #004411; 
-            margin-top: 15px; 
-            text-transform: uppercase;
-        }
+        body { background-color: #050505; color: #00ff41; font-family: 'Courier New', monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+        #terminal { width: 90%; max-width: 600px; border: 1px solid #00ff41; padding: 30px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); background: #000; }
+        input { background: transparent; border: none; color: #00ff41; font-family: inherit; font-size: 1.2rem; outline: none; width: 100%; border-bottom: 1px solid #004411; margin-top: 15px; text-transform: uppercase; }
         .hidden { display: none !important; }
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
         hr { border: 0; border-top: 1px solid #004411; margin: 20px 0; }
         .glitch { color: white; text-shadow: 2px 2px #ff0000; font-weight: bold; }
     </style>
@@ -49,18 +18,41 @@
 <div id="terminal">
     <div id="login">
         <p>> SISTEMA OPERATIVO NEXO [v.2120.9]</p>
-        <p>> NODO: GRAN TERMINAL / ACCESO RESTRINGIDO</p>
-        <p>> ESTADO: ESPERANDO AUTORIZACIÓN DEL SEPTEM...</p>
-        <br>
-        <p>> INGRESE CÓDIGO DE ACCESO (ARIS-KEY):</p>
+        <p>> INGRESE CÓDIGO DE ACCESO (101092ARIS):</p>
         <input type="text" id="passInput" autofocus autocomplete="off">
-        <p id="errorMsg" class="hidden" style="color: #ff4444; margin-top: 10px;">> ERROR: PATRÓN NO RECONOCIDO. ACCESO DENEGADO.</p>
+        <p id="errorMsg" class="hidden" style="color: #ff4444;">> ERROR: ACCESO DENEGADO.</p>
     </div>
 
     <div id="content" class="hidden">
         <p>> AUTENTICACIÓN EXITOSA.</p>
-        <p>> IDENTIDAD CONFIRMADA POR EL BIBLIOTECARIO.</p>
         <p class="glitch">> ESTADO: ERES UN HUMANO MÁS QUE SE HA CONECTADO AL NEXO.</p>
         
         <p>> REGISTRO DE BIOMASA (ID): 
-            <img src="
+            <img src="https://counter.seeyoufarm.com/counter.jpg?p=nexo-comparan-pulso" alt="Contador" style="vertical-align: middle; filter: hue-rotate(80deg);">
+        </p>
+        
+        <hr>
+        <p style="color: #fff; line-height: 1.6;">
+            "Felicidades, Natural. Has llegado al final. 
+            El Nexo ya conoce tu rastro. No cierres los ojos. 
+            'El Último Pulso' no es una historia... es una advertencia."
+        </p>
+    </div>
+</div>
+
+<script>
+    const input = document.getElementById('passInput');
+    input.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            if (input.value.trim().toUpperCase() === '101092ARIS') {
+                document.getElementById('login').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+            } else {
+                document.getElementById('errorMsg').classList.remove('hidden');
+                input.value = '';
+            }
+        }
+    });
+</script>
+</body>
+</html>
